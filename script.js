@@ -1,5 +1,11 @@
 // RPG Portfolio JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Fix mobile 100vh issues by setting a CSS variable --vh based on window.innerHeight
+    function setVh() {
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
     // ========== CUSTOM CURSOR ==========
     const cursor = document.createElement('div');
     cursor.classList.add('cursor');

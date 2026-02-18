@@ -1280,7 +1280,9 @@ body {
     background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2a2a6a 100%);
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    /* Use dynamic viewport units on mobile to avoid address-bar gaps */
+    min-height: 100svh;
+    min-height: calc(var(--vh, 1vh) * 100);
     display: flex;
     align-items: center;
 }
@@ -1878,7 +1880,9 @@ body {
         border-bottom: 2px solid rgba(0, 243, 255, 0.3);
         box-shadow: var(--shadow-xl);
         z-index: 9999;
-        max-height: calc(100vh - 80px);
+        /* avoid 100vh glitches on mobile browsers */
+        max-height: calc(100svh - 80px);
+        max-height: calc((var(--vh, 1vh) * 100) - 80px);
         overflow-y: auto;
     }
     
@@ -3611,10 +3615,10 @@ body {
 /* Transparent game overlay container */
 .game-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    /* Use inset to avoid viewport unit issues (100vw / 100vh glitches on some mobile browsers) */
+    inset: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 9998;
     overflow: hidden;

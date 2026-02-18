@@ -88,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Canvas setup
     function resizeCanvas() {
+        // Prefer CSS --vh for mobile-safe viewport height (set in script.js)
+        const vhVar = getComputedStyle(document.documentElement).getPropertyValue('--vh');
+        const vh = vhVar ? parseFloat(vhVar) : (window.innerHeight * 0.01);
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.height = Math.round(vh * 100); // vh * 100 => actual viewport height in px
         isMobile = window.innerWidth <= 768;
     }
 
